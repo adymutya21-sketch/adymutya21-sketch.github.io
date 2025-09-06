@@ -13,14 +13,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px; /* prevents content from touching edges on mobile */
     }
 
     .card {
       background: #fff;
       border-radius: 20px;
-      padding: 40px;
-      max-width: 400px;
+      padding: 30px;
+      width: 100%;
+      max-width: 450px;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
@@ -36,34 +38,65 @@
 
     h1 {
       margin: 10px 0;
-      font-size: 28px;
+      font-size: 24px;
       color: #444;
     }
 
     p.bio {
       font-size: 16px;
       line-height: 1.6;
-      margin: 20px 0;
+      margin: 15px 0;
       color: #666;
     }
 
     .contact {
       margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
 
     .contact a {
-      display: inline-block;
-      margin: 8px;
+      flex: 1 1 auto;
+      text-align: center;
+      min-width: 120px;
       text-decoration: none;
       color: white;
       background: #9face6;
       padding: 10px 20px;
       border-radius: 25px;
       transition: 0.3s;
+      font-size: 14px;
     }
 
     .contact a:hover {
       background: #74ebd5;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px;
+      }
+
+      .card img {
+        width: 100px;
+        height: 100px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      p.bio {
+        font-size: 14px;
+      }
+
+      .contact a {
+        font-size: 13px;
+        padding: 8px 15px;
+      }
     }
   </style>
 </head>
@@ -78,10 +111,9 @@
     </p>
     <div class="contact">
       <a href="mailto:adymutya21@gmail.com">Email</a>
-      <a href="https://linkedin.com/in/johndoe" target="_blank">LinkedIn</a>
-      <a href="https://github.com/johndoe" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/adymutya" target="_blank">LinkedIn</a>
+      <a href="https://github.com/adymutya" target="_blank">GitHub</a>
     </div>
   </div>
 </body>
 </html>
-
