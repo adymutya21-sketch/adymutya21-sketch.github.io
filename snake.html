@@ -5,39 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snake Game</title>
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Prevent scrolling */
       background: #111;
       color: #fff;
       font-family: Arial, sans-serif;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     h1 {
-      margin-bottom: 5px;
+      margin: 8px 0 4px;
     }
 
     #controls {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       font-size: 14px;
       color: #ccc;
+    }
+
+    #score {
+      margin: 5px;
+      font-size: 18px;
     }
 
     canvas {
       border: 2px solid #fff;
       background: #000;
-      max-width: 90vw;
-      max-height: 70vh;
+      max-width: 95vw;
+      max-height: 60vh;
     }
 
     .btn {
-      margin-top: 12px;
-      padding: 10px 20px;
+      margin: 8px;
+      padding: 10px 18px;
       border: none;
       background: #4CAF50;
       color: white;
@@ -51,18 +58,13 @@
       background: #45a049;
     }
 
-    #score {
-      margin: 8px;
-      font-size: 18px;
-    }
-
     #gameOver {
       display: none;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     #finalScore {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-size: 18px;
       font-weight: bold;
     }
@@ -73,7 +75,7 @@
       grid-template-columns: repeat(3, 60px);
       grid-template-rows: repeat(3, 60px);
       gap: 10px;
-      margin-top: 15px;
+      margin-top: 12px;
     }
 
     .ctrl-btn {
@@ -89,7 +91,6 @@
       background: #555;
     }
 
-    /* Empty grid spots */
     .empty {
       visibility: hidden;
     }
@@ -101,11 +102,13 @@
   <div id="score">Score: 0</div>
   <canvas id="gameCanvas" width="400" height="400"></canvas>
 
+  <!-- Always visible back button -->
+  <button class="btn" onclick="window.location.href='index.html'">Back to Home</button>
+
   <!-- Restart / Game Over section -->
   <div id="gameOver">
     <div id="finalScore"></div>
     <button class="btn" onclick="restartGame()">Restart</button>
-    <button class="btn" onclick="window.location.href='index.html'">Back to Home</button>
   </div>
 
   <!-- Mobile controls -->
@@ -149,18 +152,12 @@
     document.addEventListener("keydown", changeDirection);
 
     function changeDirection(event) {
-      if (event.keyCode === 37 && direction !== "RIGHT") {
-        direction = "LEFT";
-      } else if (event.keyCode === 38 && direction !== "DOWN") {
-        direction = "UP";
-      } else if (event.keyCode === 39 && direction !== "LEFT") {
-        direction = "RIGHT";
-      } else if (event.keyCode === 40 && direction !== "UP") {
-        direction = "DOWN";
-      }
+      if (event.keyCode === 37 && direction !== "RIGHT") direction = "LEFT";
+      else if (event.keyCode === 38 && direction !== "DOWN") direction = "UP";
+      else if (event.keyCode === 39 && direction !== "LEFT") direction = "RIGHT";
+      else if (event.keyCode === 40 && direction !== "UP") direction = "DOWN";
     }
 
-    // Mobile button control
     function setDirection(dir) {
       if (dir === "LEFT" && direction !== "RIGHT") direction = "LEFT";
       if (dir === "UP" && direction !== "DOWN") direction = "UP";
@@ -172,11 +169,9 @@
       ctx.fillStyle = "#000";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Food
       ctx.fillStyle = "red";
       ctx.fillRect(food.x, food.y, box, box);
 
-      // Snake
       for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = i === 0 ? "lime" : "green";
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
@@ -192,7 +187,6 @@
       if (direction === "RIGHT") snakeX += box;
       if (direction === "DOWN") snakeY += box;
 
-      // Eat food
       if (snakeX === food.x && snakeY === food.y) {
         score++;
         scoreDisplay.textContent = "Score: " + score;
@@ -206,7 +200,6 @@
 
       let newHead = { x: snakeX, y: snakeY };
 
-      // Game over
       if (
         snakeX < 0 ||
         snakeY < 0 ||
@@ -224,12 +217,7 @@
     }
 
     function collision(head, array) {
-      for (let i = 0; i < array.length; i++) {
-        if (head.x === array[i].x && head.y === array[i].y) {
-          return true;
-        }
-      }
-      return false;
+      return array.some(seg => head.x === seg.x && head.y === seg.y);
     }
 
     function restartGame() {
@@ -237,7 +225,6 @@
       initGame();
     }
 
-    // Start the first game
     initGame();
   </script>
 </body>
