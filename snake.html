@@ -21,11 +21,11 @@
     }
 
     h1 {
-      margin: 8px 0 4px;
+      margin: 6px 0 2px;
     }
 
     #controls {
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       font-size: 14px;
       color: #ccc;
     }
@@ -38,8 +38,10 @@
     canvas {
       border: 2px solid #fff;
       background: #000;
-      max-width: 95vw;
-      max-height: 60vh;
+      width: 90vmin;   /* scale to fit screen */
+      height: 90vmin;  /* square shape */
+      max-width: 400px;
+      max-height: 400px;
     }
 
     .btn {
@@ -60,7 +62,8 @@
 
     #gameOver {
       display: none;
-      margin-top: 10px;
+      margin-top: 12px;
+      text-align: center;
     }
 
     #finalScore {
@@ -98,20 +101,11 @@
 </head>
 <body>
   <h1>Snake Game</h1>
-  <div id="controls">Use Arrow Keys: ⬆️ ⬇️ ⬅️ ➡️ or Tap Buttons</div>
+  <div id="controls">Use Arrow Keys ⬆️⬇️⬅️➡️ or Tap Buttons</div>
   <div id="score">Score: 0</div>
   <canvas id="gameCanvas" width="400" height="400"></canvas>
 
-  <!-- Always visible back button -->
-  <button class="btn" onclick="window.location.href='index.html'">Back to Home</button>
-
-  <!-- Restart / Game Over section -->
-  <div id="gameOver">
-    <div id="finalScore"></div>
-    <button class="btn" onclick="restartGame()">Restart</button>
-  </div>
-
-  <!-- Mobile controls -->
+  <!-- Mobile controls (shown only during game) -->
   <div id="mobileControls">
     <div class="empty"></div>
     <button class="ctrl-btn" onclick="setDirection('UP')">⬆️</button>
@@ -126,12 +120,20 @@
     <div class="empty"></div>
   </div>
 
+  <!-- Restart / Game Over section -->
+  <div id="gameOver">
+    <div id="finalScore"></div>
+    <button class="btn" onclick="restartGame()">Restart</button>
+    <button class="btn" onclick="window.location.href='index.html'">Back to Home</button>
+  </div>
+
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
     const scoreDisplay = document.getElementById("score");
     const gameOverDiv = document.getElementById("gameOver");
     const finalScoreDisplay = document.getElementById("finalScore");
+    const mobileControls = document.getElementById("mobileControls");
 
     const box = 20;
     let snake, direction, food, score, game;
@@ -146,6 +148,7 @@
         y: Math.floor(Math.random() * 20) * box,
       };
       gameOverDiv.style.display = "none";
+      mobileControls.style.display = "grid"; // show controls during game
       game = setInterval(drawGame, 100);
     }
 
@@ -210,6 +213,7 @@
         clearInterval(game);
         finalScoreDisplay.textContent = "Game Over! Final Score: " + score;
         gameOverDiv.style.display = "block";
+        mobileControls.style.display = "none"; // hide controls when game over
         return;
       }
 
