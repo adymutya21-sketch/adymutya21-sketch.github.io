@@ -57,8 +57,15 @@
       color: #333;
     }
 
-    button {
+    .buttons {
       margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
       padding: 10px 20px;
       font-size: 1rem;
       border: none;
@@ -71,6 +78,14 @@
 
     button:hover {
       background: #45a049;
+    }
+
+    .home-btn {
+      background: #2196F3;
+    }
+
+    .home-btn:hover {
+      background: #1976D2;
     }
 
     /* Responsive adjustments */
@@ -92,7 +107,11 @@
     <h1>Tic-Tac-Toe</h1>
     <div class="board" id="board"></div>
     <div class="status" id="status">Player X's turn</div>
-    <button onclick="resetGame()">Restart</button>
+    
+    <div class="buttons">
+      <button onclick="resetGame()">Restart</button>
+      <button class="home-btn" onclick="goHome()">Home</button>
+    </div>
   </div>
 
   <script>
@@ -155,6 +174,10 @@
       gameState = ["", "", "", "", "", "", "", "", ""];
       statusText.textContent = `Player X's turn`;
       createBoard();
+    }
+
+    function goHome() {
+      window.location.href = "index.html";
     }
 
     createBoard();
