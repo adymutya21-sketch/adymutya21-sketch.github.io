@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ady Mutya | Portfolio</title>
   <style>
-    /* General Reset & Body */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -39,7 +38,6 @@
       font-size: 18px;
     }
 
-    /* Section Styling */
     section {
       padding: 60px 20px;
       max-width: 900px;
@@ -59,16 +57,39 @@
     }
 
     .skills {
-      margin-top: 15px;
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    .skills span {
-      display: inline-block;
-      background: #e9ecef;
-      margin: 5px;
-      padding: 8px 15px;
-      border-radius: 20px;
+    .skill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      padding: 15px;
+      border-radius: 15px;
+      width: 100px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+    }
+
+    .skill img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
+    }
+
+    .skill span {
       font-size: 14px;
+      font-weight: 600;
+      color: #333;
     }
 
     /* Projects Section */
@@ -168,12 +189,10 @@
       color: #666;
     }
 
-    /* Mobile adjustments */
     @media (max-width: 480px) {
       header h1 {
         font-size: 24px;
       }
-
       section h2 {
         font-size: 22px;
       }
@@ -198,11 +217,26 @@
       gaming, and watching videos.
     </p>
     <div class="skills">
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>JavaScript</span>
-      <span>Python</span>
-      <span>Arduino</span>
+      <div class="skill">
+        <img src="html.png" alt="HTML Icon">
+        <span>HTML</span>
+      </div>
+      <div class="skill">
+        <img src="css.png" alt="CSS Icon">
+        <span>CSS</span>
+      </div>
+      <div class="skill">
+        <img src="javascript.png" alt="JavaScript Icon">
+        <span>JavaScript</span>
+      </div>
+      <div class="skill">
+        <img src="python.png" alt="Python Icon">
+        <span>Python</span>
+      </div>
+      <div class="skill">
+        <img src="arduino.png" alt="Arduino Icon">
+        <span>Arduino</span>
+      </div>
     </div>
   </section>
 
